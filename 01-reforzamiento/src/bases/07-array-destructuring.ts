@@ -14,3 +14,13 @@ const returnsArrayFn = () => {
 const [letters, numbers] = returnsArrayFn();
 
 // console.log(letters + 100);
+console.log({letters, numbers});
+
+//Tarea:
+const useState = (name:string) => {
+  return [name, (setName:string) => console.log(setName) ] as const
+}
+
+const [name, setName] = useState('Goku');
+console.log(name);
+setName('Vegeta');
