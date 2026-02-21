@@ -1,3 +1,5 @@
+import type { GiphyRandomResponse } from "../data/giphy-response";
+
 const API_KEY = "cJikTNpQ2luE1qA9jeUGRdsQ9IiArrLf";
 
 const myRequest = fetch(
@@ -14,16 +16,19 @@ const myRequest = fetch(
 //     console.error(error);
 //   });
 
+const createImageInsideDOM = (url: string) => {
+  const imgElement = document.createElement("img");
+  imgElement.src = url;
+
+  document.body.append(imgElement);
+};
+
 myRequest
   .then((response) => response.json())
-  .then((data) => {
-    const imageUrl = data.data.images.original.url;
-    console.log(imageUrl);
+  .then(({ data }: GiphyRandomResponse) => {
+    const imageUrl = data.images.original.url;
 
-    const imgElement = document.createElement("img");
-    imgElement.src = imageUrl;
-
-    document.body.append(imgElement);
+    createImageInsideDOM(imageUrl);
   })
   .catch((error) => {
     console.error(error);
